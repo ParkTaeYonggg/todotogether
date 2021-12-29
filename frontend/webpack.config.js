@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
-const mode = "development";
+const mode = process.env.NODE_ENV !== 'production' ? "development" : "production";
 
 module.exports = {
     mode: mode, // 배포시 production으로
