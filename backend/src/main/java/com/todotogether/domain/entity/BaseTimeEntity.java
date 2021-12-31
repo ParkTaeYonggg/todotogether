@@ -18,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 public abstract class BaseTimeEntity {
 
     @CreatedDate
+<<<<<<< Updated upstream
     private String regDate;
 
     @LastModifiedDate
@@ -27,10 +28,27 @@ public abstract class BaseTimeEntity {
     public void onPrePersist(){
         this.regDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
         this.modDate = this.regDate;
+=======
+    private String createdDate;
+
+    @LastModifiedDate
+    private String modifiedDate;
+
+    @PrePersist
+    public void onPrePersist(){
+        this.createdDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
+        this.modifiedDate = this.createdDate;
+>>>>>>> Stashed changes
     }
 
     @PreUpdate
     public void onPreUpdate(){
+<<<<<<< Updated upstream
         this.modDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
     }
 }
+=======
+        this.modifiedDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
+    }
+}
+>>>>>>> Stashed changes
