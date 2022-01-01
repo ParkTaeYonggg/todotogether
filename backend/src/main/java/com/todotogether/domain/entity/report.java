@@ -1,17 +1,31 @@
 package com.todotogether.domain.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
+
+import javax.persistence.*;
 
 @Entity
+@Getter
+@NoArgsConstructor
 public class report extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long rpId;
-    private long rpUid;
+
+    @ManyToOne
+    @JoinColumn(name = "rpUid",nullable = false)
+    private Member member;
+
+    @ManyToOne
+    @JoinColumn(name = "rpUid",nullable = false)
     private long rpCid;
+
+    @Column(nullable = false, length = 10)
+    @ColumnDefault("false")
     private boolean rpStatus;
+
+    @Column(nullable = false)
     private long rpTarget;
 }
