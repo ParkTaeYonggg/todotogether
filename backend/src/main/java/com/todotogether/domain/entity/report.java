@@ -15,14 +15,14 @@ public class report extends BaseTimeEntity{
     private long rpId;
 
     @ManyToOne
-    @JoinColumn(name = "rpUid",nullable = false)
+    @JoinColumn(name = "rpUid", nullable = false)
     private Member member;
 
     @ManyToOne
-    @JoinColumn(name = "rpUid",nullable = false)
-    private long rpCid;
+    @JoinColumn(name = "rcCid", nullable = false)
+    private RpCategory rpCategory;
 
-    @Column(nullable = false, length = 10)
+    @Column(nullable = false)
     @ColumnDefault("false")
     private boolean rpStatus;
 

@@ -27,7 +27,6 @@ public abstract class BaseTimeEntity {
     public void onPrePersist(){
         this.regDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
         this.modDate = this.regDate;
-
     }
 
     @PreUpdate

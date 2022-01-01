@@ -1,5 +1,6 @@
 package com.todotogether.domain.entity;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
 
 @Entity
 @Getter
@@ -42,6 +44,7 @@ public class Member extends BaseTimeEntity{
     @ColumnDefault("0")
     private int rpCount;
 
+    @Column(length = 30)
     private String profile;
 
 }
