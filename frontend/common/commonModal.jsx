@@ -7,7 +7,7 @@ export default function CommonModal ({children, onClick, size}) {
     return (
         <ModalWrapper>
             <InnerWrapper>
-                <div style={{justifySelf:"end", cursor:"pointer"}} onClick={onClick}>X</div>
+                <div style={{justifySelf:"end", cursor:"pointer", alignSelf:"center"}} onClick={onClick}>X</div>
                 <div style={{justifySelf:"center"}}>{children}</div>
             </InnerWrapper>
         </ModalWrapper>
@@ -15,7 +15,7 @@ export default function CommonModal ({children, onClick, size}) {
 }
 
 const ModalWrapper = styled.div`
-    position: absolute;
+    position: fixed;
     width: 100%;
     min-height: 600px;
     height: 100%;
@@ -23,7 +23,7 @@ const ModalWrapper = styled.div`
     align-items: center;
     justify-content: center;
     opacity: 0;
-
+    z-index: 4;
     &::before {
         position: absolute;
         content: '';
@@ -48,7 +48,7 @@ const InnerWrapper = styled.div`
     z-index: 1;
     width: ${props => props.size === 'big' ? '70%' : '420px'};
     height: 50%;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
     background-color: ${theme.boxColor};
     border-radius: 15px;

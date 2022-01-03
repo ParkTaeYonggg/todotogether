@@ -1,9 +1,9 @@
-import {CombineReducers, createStore} from "react-redux";
+import {combineReducers, createStore} from "redux";
+import {certificationReducer} from "./certificationReducer";
 
 
-
-const RootReducer = CombineReducers({
-
+const RootReducer = combineReducers({
+    certificationReducer,
 });
 
 export const store = createStore(RootReducer);
