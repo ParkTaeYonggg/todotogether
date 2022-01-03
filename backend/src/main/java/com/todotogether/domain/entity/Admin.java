@@ -27,5 +27,5 @@ public class Admin {
     private String aPassword;
 
     @Column(length = 40)
-    private String aMail;
+    private String aEmail;
 }
