@@ -1,13 +1,15 @@
 package com.todotogether.domain.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
-@Getter
+@AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Entity
 public class RpCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

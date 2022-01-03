@@ -1,14 +1,16 @@
 package com.todotogether.domain.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
-@Entity
-@Getter
+@AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Entity
 public class report extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +18,7 @@ public class report extends BaseTimeEntity{
 
     @ManyToOne
     @JoinColumn(name = "rpUid", nullable = false)
-    private Member member;
+    private Member member  ;
 
     @ManyToOne
     @JoinColumn(name = "rcCid", nullable = false)
