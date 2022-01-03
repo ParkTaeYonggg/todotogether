@@ -7,12 +7,12 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.util.List;
 
-
-@Entity
-@Getter
+@AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Entity
 public class Member extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,4 +47,13 @@ public class Member extends BaseTimeEntity{
     @Column(length = 30)
     private String profile;
 
+    @ManyToMany
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name="user_id"),
+            inverseJoinColumns = @JoinColumn(name="role_id")
+    )
+    private List<Role> roles;
+
+    @OneToMany(mappedBy = "nMember", cascade = CascadeType.REMOVE)
+    private List<Notification> notifications;
 }

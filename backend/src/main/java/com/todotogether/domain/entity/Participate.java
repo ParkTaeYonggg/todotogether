@@ -1,22 +1,36 @@
 package com.todotogether.domain.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.sql.Date;
+import javax.persistence.*;
 
-@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
+@Entity
 public class Participate extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long pId;
-    private long pTgid;
-    private long pUid;
+
+    @ManyToOne
+    @JoinColumn(name = "pTgid", nullable = false)
+    private Together pTogether;
+
+    @ManyToOne
+    @JoinColumn(name = "pUid", nullable = false)
+    private Member member;
+
+    @Column(nullable = false)
     private String pStartDate;
+
+    @Column(nullable = false)
     private String pEndDate;
+
+    @Column(nullable = false)
+    @ColumnDefault("true")
     private boolean pStatus;
 }
