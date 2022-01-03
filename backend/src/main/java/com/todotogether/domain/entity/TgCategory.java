@@ -17,9 +17,10 @@ public class TgCategory {
     private long tgcId;
 
     @Column(length = 10, nullable = false)
+
     private String tgcType;
 
     @OneToMany(mappedBy = "tgCategory")
     private List<Together> togethers;
-
+  
 }

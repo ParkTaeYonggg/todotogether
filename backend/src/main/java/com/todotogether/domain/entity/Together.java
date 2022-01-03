@@ -1,7 +1,7 @@
 package com.todotogether.domain.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 

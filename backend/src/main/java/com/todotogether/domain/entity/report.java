@@ -18,7 +18,7 @@ public class report extends BaseTimeEntity{
 
     @ManyToOne
     @JoinColumn(name = "rpUid", nullable = false)
-    private Member member;
+    private Member member  ;
 
     @ManyToOne
     @JoinColumn(name = "rcCid", nullable = false)
