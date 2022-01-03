@@ -16,6 +16,6 @@ export const theme = {
     adminFontFamily: 'Malgun Gothic',
     fontSizeSmall: "18px",
     fontSizeTall: "31px",
-    fontSizeMobileSmall: "10px",
+    fontSizeMobileSmall: "11px",
     fontSizeMobileTall: "17px",
 }

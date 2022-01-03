@@ -1,4 +1,3 @@
-
 # dependencies
 /node_modules
 /.pnp
@@ -20,3 +19,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+.vscode/*
+
+.env.*
+todotofront.pem

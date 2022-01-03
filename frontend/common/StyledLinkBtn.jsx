@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {theme} from "./theme";
-export default function StyledLinkBtn ({children, to}) {
+export default function StyledLinkBtn ({ children, to }) {
     return <LinkTag to={to}>{children}</LinkTag>;
 }
 
@@ -12,7 +12,7 @@ border: 2px solid ${theme.fontColor};
 border-radius: 15px;
 padding: 10px;
 color: white;
-font-size: ${theme.fontSizeMobileTall};
+font-size: 14px;
 text-decoration: none;
 position: relative;
 
@@ -49,7 +49,12 @@ position: relative;
 
 @keyframes hovering {
     to { 
-        width: 67%; 
+        width: 66%; 
     };
 }
+
+@media screen and (max-width: 471px) {
+    font-size: 12px;
+}
+
 `;
