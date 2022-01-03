@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.todotogether.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
