@@ -27,7 +27,6 @@ public class Comment extends BaseTimeEntity{
     @Column(nullable = false, length = 200)
     private String cContent;
 
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     @ColumnDefault("0")

@@ -25,7 +25,7 @@ public class Together extends BaseTimeEntity{
     @JoinColumn(name = "tgcId", nullable = false)
     private TgCategory tgCategory;
 
-    @Column(length =60, nullable = false)
+    @Column(length = 60, nullable = false)
     private String tgSubject;
 
     @Column(length = 300, nullable = false)

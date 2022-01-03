@@ -16,9 +16,11 @@ public class TgCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long tgcId;
 
-    @Column(nullable = false, length = 10)
+    @Column(length = 10, nullable = false)
+
     private String tgcType;
 
     @OneToMany(mappedBy = "tgCategory")
     private List<Together> togethers;
+  
 }

@@ -1,7 +1,9 @@
 package com.todotogether.domain.entity;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -22,7 +24,7 @@ public class Questions extends BaseTimeEntity{
     @Column(length = 60, nullable = false)
     private String qSubject;
 
-    @Column( length = 300, nullable = false)
+    @Column(length = 300, nullable = false)
     private String qContent;
 
     @Column(nullable = false)
