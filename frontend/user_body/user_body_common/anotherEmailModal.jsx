@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { BsFillExclamationCircleFill } from "react-icons/bs";
 import AnotherEmailModalContent from "../user_body_common/anotherEmailModalContent";
 import CertificationInput from "./certification/certificationInput";
-
 import Certification from "./certification/certification";
 import { useSelector } from "react-redux";
 

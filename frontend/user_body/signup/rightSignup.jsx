@@ -25,6 +25,7 @@ export default function RightSignup () {
 
     //타겟
     let imgRef = useRef();
+
     return (
         <>  
             <img ref={e => imgRef.current = e} 
@@ -66,3 +67,4 @@ const StyledCertificationCommonDiv = styled.div`
         &::after { ${props => props.isChked ? "top:0px" : null} }
     }
 `;
+
