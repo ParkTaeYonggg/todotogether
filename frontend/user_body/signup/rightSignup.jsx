@@ -50,7 +50,10 @@ const StyledCertificationCommonDiv = styled.div`
         top: 295px;
         padding: 5px 10px;
         display: inherit;
+        width: 60px;
+        height: 20px;
     }
+    &::after { ${props => props.isChked ? "top:36px" : null} }
     @media screen and (max-width: 720px) {
        #certificationRightSignupBtn {
             top: 384px;
@@ -60,5 +63,6 @@ const StyledCertificationCommonDiv = styled.div`
             height: 20px;
             display: none;
         }
+        &::after { ${props => props.isChked ? "top:0px" : null} }
     }
 `;

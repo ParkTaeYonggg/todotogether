@@ -37,7 +37,7 @@ function Header () {
         <>
         <HeaderTag scrollEvent={scrollEvent}>
             <div className="innerWrapper">
-                <span>TodoTogether</span>
+                <Link to="/">TodoTogether</Link>
                 <Link className="basicBtn" to="/notice">공지사항</Link>
             </div>
             <h1>{isLogin ? <BsFillBellFill/> : null}</h1>
