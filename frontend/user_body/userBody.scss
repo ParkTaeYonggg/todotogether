@@ -68,15 +68,19 @@
     justify-content: center;
     align-items: center;
 
+
     .commonUserSignupBtn {
         transform: translate(-8px, 48px);
     }
+
 }
 
 .userInfoInnerWrapper {
     width: 50%;
     display: grid;
+
     grid-template-rows: 100% 20%;
+
     min-height: 500px;
     .userInfoDeepInnerWrapper {
         display: grid;
@@ -87,7 +91,6 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            
             div { height: 16%; margin-bottom: 10px; }
             input { width: 96%; }
         };
@@ -96,13 +99,13 @@
             flex-direction: column;
             img { width: 100%;};
         }
+
         @media screen and (max-width: 720px) {
             grid-template-columns: 100%;
             grid-template-rows: 50% 50%;
             .userInfoDeepLeftInnerWrapper { order: 2;}
             .userInfoDeepRightInnerWrapper { order: 1; }
         }
-
     }
 }
 
@@ -117,7 +120,9 @@
         top: 35px; 
         z-index: 1; 
         cursor: pointer;
+
         padding: 5px 10px 5px 10px;
+
     }
     &::after {
         content: '프로필사진 등록하기';
@@ -147,7 +152,9 @@
 // 다른이메일 버튼 시스스
 .anotherModalBtnWrapper {
     position: relative;
+
     top: 38px;
+
     .anotherModalBtnContent {
         position: absolute;
         width: 120px;
@@ -177,4 +184,3 @@
     width: 59px;
     height: 20px;
 }
-

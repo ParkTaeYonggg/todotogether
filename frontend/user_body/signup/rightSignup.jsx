@@ -1,3 +1,4 @@
+
 import React, { useRef, useState, useEffect } from "react";
 import alternative from "../../common/imgs/alternative.png";
 import Certification from "../user_body_common/certification/certification";
@@ -25,6 +26,7 @@ export default function RightSignup () {
 
     //타겟
     let imgRef = useRef();
+
     return (
         <>  
             <img ref={e => imgRef.current = e} 
@@ -62,3 +64,4 @@ const StyledCertificationCommonDiv = styled.div`
         }
     }
 `;
+
