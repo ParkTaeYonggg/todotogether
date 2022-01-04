@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { action_on } from "../../../common/reduxFolder/certificationReducer";
 
-export default function Certification ({children, Style, url, callback, type}) {
+export default function Certification ({children, Style, url, callback, type, id}) {
     const dispatch = useDispatch();
     const state = useSelector(state => state.certificationReducer);
 
@@ -15,8 +15,12 @@ export default function Certification ({children, Style, url, callback, type}) {
     return (
         <>
             <span onClick={handlerAxios} 
-                className="signupSendBtn" 
-                style={Style}>{children}</span>
+                  className="signupSendBtn" 
+                  style={Style}
+                  isChked={state.isChked}
+                  id={id}>
+            {children}
+            </span>
         </>
     );
 }
