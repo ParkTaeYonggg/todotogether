@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import StyledInput from "../../common/StyledInput";
 import AnotherEmailModal from "../user_body_common/anotherEmailModal";
 import ValidityChk from "../user_body_common/validityChk";
@@ -6,6 +6,8 @@ import ValidityChk from "../user_body_common/validityChk";
 export default function LeftSignup () {
     const [values, setValues] = useState([]);
     const [error, setError] = useState([]);
+    const [errorMessage, setErrorMessage] = useState("");
+    // 에러메시지가 온다면 이걸로 사틀드인풋의 content 변경하면 됨.
 
     // 벨류핸들러
     const handlerValues = (type, e) => {
@@ -15,8 +17,6 @@ export default function LeftSignup () {
     // 유효성검사
     const handlervalidityChk = (e) => { ValidityChk(e, callback); }
     const callback = (type,e) => { setError({...error, [type]:e}); }
-
-
 
     // 타겟
     let inputEmailRef = useRef();
@@ -39,14 +39,25 @@ export default function LeftSignup () {
                          onBlur={e => handlervalidityChk(e)}
                          placeholder="특수문자 사용 불가능"
                          />
-            <StyledInput id="pw"
-                         name="pw"
+            <StyledInput id="password"
+                         name="password"
                          type="password"
                          labeling="패스워드"
                          value={values.pw||""}
-                         onChange={e => handlerValues("pw", e)}
+                         onChange={e => handlerValues("password", e)}
                          Ref={e => inputPwRef = e}
                          error={error.pw||""}
+                         onBlur={e => handlervalidityChk(e)}
+                         placeholder="특수문자 및 숫자 포함 8자 이상"
+                         />
+            <StyledInput id="password2"
+                         name="password2"
+                         type="password"
+                         labeling="패스워드 확인"
+                         value={values.pw2||""}
+                         onChange={e => handlerValues("password2", e)}
+                         Ref={e => inputPwRef = e}
+                         error={error.pw2||""}
                          onBlur={e => handlervalidityChk(e)}
                          placeholder="특수문자 및 숫자 포함 8자 이상"
                          />
@@ -84,14 +95,14 @@ export default function LeftSignup () {
                          placeholder="ex) (-입력없이) 0109999999"
                          />
             <div>
-            <StyledInput id="anotherEmail"
-                         name="anotherEmail"
+            <StyledInput id="backup_email"
+                         name="backup_email"
                          type="text"
                          labeling="다른이메일"
-                         value={values.anotherEmail||""}
-                         onChange={e => handlerValues("anotherEmail", e)}
+                         value={values.backup_email||""}
+                         onChange={e => handlerValues("backup_email", e)}
                          Ref={e => inputAnotherEmailRef = e}
-                         error={error.anotherEmail||""}
+                         error={error.backup_email||""}
                          onBlur={e => handlervalidityChk(e)}
                          placeholder="특수문자 사용 불가능"
                          />

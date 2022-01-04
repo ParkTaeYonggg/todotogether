@@ -6,7 +6,7 @@ import { BsFillArrowRightCircleFill } from "react-icons/bs";
 
 function MainGoSignup () {
     return (
-        <MainSignupBar>
+        <MainSignupBar to="/signup">
             <span>바로시작하기<BsFillArrowRightCircleFill/></span>
         </MainSignupBar>
     );

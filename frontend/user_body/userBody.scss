@@ -128,10 +128,12 @@
         content: '프로필사진 등록하기';
         position: absolute;
         width: inherit;
-        left: 50%;
-        transform: translate(-50px, 40px);
+        left: 25%;
         color: common.$fontColor;
         display: inline-block;
+    }
+    @media screen and (max-width: 720px) {
+        &::after { transform: translate(-50px, 40px); left: 50%;}
     }
 }
 
@@ -183,4 +185,9 @@
     position: absolute;
     width: 59px;
     height: 20px;
+    display: none;
+    @media screen and (max-width: 720px) {
+        display: inherit;
+    }
 }
+
