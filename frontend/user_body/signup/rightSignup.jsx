@@ -1,10 +1,13 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import alternative from "../../common/imgs/alternative.png";
 import Certification from "../user_body_common/certification/certification";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 export default function RightSignup () {
     const [ imgValue, setImgValue ] = useState();
+    const state = useSelector(state => state.certificationReducer);
+
     // 파일 미리보기 및 벨류업데이트
     const handlerValue = (e) => {    
         if (e.target.files.length !== 0) {
@@ -22,7 +25,6 @@ export default function RightSignup () {
 
     //타겟
     let imgRef = useRef();
-
     return (
         <>  
             <img ref={e => imgRef.current = e} 
@@ -30,14 +32,33 @@ export default function RightSignup () {
                  onError={e => e.src = alternative} 
                  className="rightSignupUserImg"/>
 
-            <div className="inputFile">
+            <StyledCertificationCommonDiv className="inputFile"
+                                          isChked={state.isChked}>
                 <input type="file"
                     name="profile"
                     id="profile"
                     onChange={e => handlerValue(e)}/>
-            <Certification Style={{top: "205px", padding: "5px 10px 5px 10px"}}>인증하기</Certification>
+            {state.isChked ? null : <Certification id="certificationRightSignupBtn">인증하기</Certification>}
             {/* 유알엘, 타입, 콜백함수 넣기 */}
-            </div>
+            </StyledCertificationCommonDiv>
         </>
     );
 }
+
+const StyledCertificationCommonDiv = styled.div`
+    #certificationRightSignupBtn {
+        top: 295px;
+        padding: 5px 10px;
+        display: inherit;
+    }
+    @media screen and (max-width: 720px) {
+       #certificationRightSignupBtn {
+            top: 384px;
+            padding: 0px 5px;
+            left:63%; 
+            position: absolute;
+            height: 20px;
+            display: none;
+        }
+    }
+`;

@@ -20,7 +20,7 @@ export default function UserSignup () {
                     <RightSignup />    
                 </div>
                 </div>
-                <button className="signupSendBtn">회원가입</button>
+                <button className="signupSendBtn commonUserSignupBtn">회원가입</button>
             </form>
         </div>
     );
