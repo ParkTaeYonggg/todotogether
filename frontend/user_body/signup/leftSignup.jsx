@@ -3,7 +3,7 @@ import StyledInput from "../../common/StyledInput";
 import AnotherEmailModal from "../user_body_common/anotherEmailModal";
 import ValidityChk from "../user_body_common/validityChk";
 
-export default function LeftSignup () {
+export default function LeftSignup ({callbackData}) {
     const [values, setValues] = useState([]);
     const [error, setError] = useState([]);
     const [errorMessage, setErrorMessage] = useState("");
@@ -15,7 +15,8 @@ export default function LeftSignup () {
     }
    
     // 유효성검사
-    const handlervalidityChk = (e) => { ValidityChk(e, callback); }
+    const handlervalidityChk = (e) => { ValidityChk(e, callbackData); 
+    }
     const callback = (type,e) => { setError({...error, [type]:e}); }
 
     // 타겟
@@ -43,10 +44,10 @@ export default function LeftSignup () {
                          name="password"
                          type="password"
                          labeling="패스워드"
-                         value={values.pw||""}
+                         value={values.password||""}
                          onChange={e => handlerValues("password", e)}
                          Ref={e => inputPwRef = e}
-                         error={error.pw||""}
+                         error={error.password||""}
                          onBlur={e => handlervalidityChk(e)}
                          placeholder="특수문자 및 숫자 포함 8자 이상"
                          />
@@ -54,10 +55,10 @@ export default function LeftSignup () {
                          name="password2"
                          type="password"
                          labeling="패스워드 확인"
-                         value={values.pw2||""}
+                         value={values.password2||""}
                          onChange={e => handlerValues("password2", e)}
                          Ref={e => inputPwRef = e}
-                         error={error.pw2||""}
+                         error={error.password2||""}
                          onBlur={e => handlervalidityChk(e)}
                          placeholder="특수문자 및 숫자 포함 8자 이상"
                          />
