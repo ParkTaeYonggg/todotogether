@@ -5,6 +5,7 @@ export default function UseAxios ({url, callback, type, id}) {
         url: url,
         method: type,
         baseURL: "http://54.180.218.232:8080/",
+
         withCredentials: true,
     })
     .then(res => {

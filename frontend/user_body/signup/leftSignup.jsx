@@ -62,6 +62,17 @@ export default function LeftSignup ({callbackData}) {
                          onBlur={e => handlervalidityChk(e)}
                          placeholder="특수문자 및 숫자 포함 8자 이상"
                          />
+            <StyledInput id="password2"
+                         name="password2"
+                         type="password"
+                         labeling="패스워드 확인"
+                         value={values.pw2||""}
+                         onChange={e => handlerValues("password2", e)}
+                         Ref={e => inputPwRef = e}
+                         error={error.pw2||""}
+                         onBlur={e => handlervalidityChk(e)}
+                         placeholder="특수문자 및 숫자 포함 8자 이상"
+                         />
             <StyledInput id="name"
                          name="name"
                          type="text"
