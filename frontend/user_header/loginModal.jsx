@@ -18,19 +18,17 @@ function LoginModal ({onClick}) {
     // ref
     let inputRefId = useRef();
     let inputRefPw = useRef();
-
-
-    const callback = (e) => {console.log(e)}
     // 서브밋핸들러
     const handlerSubmit = (e) => {
         e.preventDefault();
-        if (inputRefId.current.value.trim() === "") {
-            SweetAlert("아이디를 입력해주세요.", "최대 ?자 이상 ?자 미만(특수문자, 한글사용 불가능)");
-        } else if (inputRefPw.current.value.trim() === "") {
-            SweetAlert("비밀번호를 입력해주세요.", "대소문자+숫자+특수문자를 포함한 최소 6자 이상");
-        } else {
-            UseAxios("api/user", callback, "get");
-        }
+        // if (inputRefId.current.value.trim() === "") {
+        //     SweetAlert("아이디를 입력해주세요.", "최대 ?자 이상 ?자 미만(특수문자, 한글사용 불가능)");
+        // } else if (inputRefPw.current.value.trim() === "") {
+        //     SweetAlert("비밀번호를 입력해주세요.", "대소문자+숫자+특수문자를 포함한 최소 6자 이상");
+        // } else {
+        //      UseAxios("api/user", callback, "get");
+        //  }
+
     }
     return (
         <CommonModal onClick={onClick}>

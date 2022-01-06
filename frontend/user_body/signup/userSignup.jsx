@@ -7,19 +7,29 @@ import UseAxios from "../../common/useAxios";
 
 export default function UserSignup () {
     const formData = new FormData(); 
+    // const formData = new URLSearchParams();
     const callbackData = (type,e) => { formData.append(type,e) }
-    const callback = (e) => {console.log(e)}
+    const callback = (e) => {alert(e)}
+
      // 서브밋핸들러
      const handlerSubmit = (e) => { 
         e.preventDefault();
         EmptyChk(e);
+
         
-        UseAxios("api/user", callback, "post");
+        let url = "user/test5?";
+        for (const [k,v] of formData) {
+            url += `&${k}=${v}`;
+        }
+        UseAxios(url, callback, "post", formData);
      }
 
     return (
         <div className="userCommonWrapper">
-            <form className="userInfoInnerWrapper" onSubmit={e => handlerSubmit(e)}>
+            <form className="userInfoInnerWrapper" 
+                  onSubmit={e => handlerSubmit(e)} 
+                  encType="multipart/form-data"
+                >
                 <div className="userInfoDeepInnerWrapper">
                     <LeftSignup callbackData={callbackData}/>
                 <div className="userInfoDeepRightInnerWrapper">

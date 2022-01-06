@@ -96,14 +96,14 @@ export default function LeftSignup ({callbackData}) {
                          placeholder="ex) (-입력없이) 0109999999"
                          />
             <div>
-            <StyledInput id="backup_email"
-                         name="backup_email"
+            <StyledInput id="backupEmail"
+                         name="backupEmail"
                          type="text"
                          labeling="다른이메일"
-                         value={values.backup_email||""}
-                         onChange={e => handlerValues("backup_email", e)}
+                         value={values.backupEmail||""}
+                         onChange={e => handlerValues("backupEmail", e)}
                          Ref={e => inputAnotherEmailRef = e}
-                         error={error.backup_email||""}
+                         error={error.backupEmail||""}
                          onBlur={e => handlervalidityChk(e)}
                          placeholder="특수문자 사용 불가능"
                          />

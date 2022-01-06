@@ -12,7 +12,7 @@ export default function EmptyChk (e) {
         SweetAlert("닉네임을 입력해주세요.","특수문자 사용 불가능");
     } else if (e.target.phone.value.trim() === "") {
         SweetAlert("전화번호를 입력해주세요.","-입력하지 않음. ex) 01011112222");
-    } else if (e.target.backup_email.value.trim() === "") {
+    } else if (e.target.backupEmail.value.trim() === "") {
         SweetAlert("다른이메일을 입력해주세요.","추후 아이디를 찾는데 도움이 됩니다.(필수항목)");
     }
 }

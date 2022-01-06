@@ -54,7 +54,7 @@ module.exports = {
         historyApiFallback: true, // 라우터 사용시 필요한 기능이다. 변경된 주소에서 새로고침해도 에러를 막아준다.
         proxy: {
             "/api": {
-                target: "http://54.180.218.232:8080",
+                target: "http://54.180.218.232:8080/",
                 pathRewrite: {"/api":"/"}
             }
         },
