@@ -50,5 +50,4 @@ export default function UseAxios (url, callback, type, formData) {
         .then(res => res.headers.authorization)
         .catch(error => alert("관리자에게 문의하세요. (에러코드 : " + error + ")"));
     }
-
 }
