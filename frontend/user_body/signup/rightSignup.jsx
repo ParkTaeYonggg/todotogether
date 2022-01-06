@@ -55,6 +55,7 @@ const StyledCertificationCommonDiv = styled.div`
         height: 20px;
     }
     &::after { ${props => props.isChked ? "top:36px" : null} }
+
     @media screen and (max-width: 720px) {
        #certificationRightSignupBtn {
             top: 384px;
