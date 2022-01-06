@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import SweetAlert from "../common/sweetAlert";
+import UseAxios from "../common/useAxios";
 
 function LoginModal ({onClick}) {
     const [values, setValues] = useState([]);
@@ -18,6 +19,8 @@ function LoginModal ({onClick}) {
     let inputRefId = useRef();
     let inputRefPw = useRef();
 
+
+    const callback = (e) => {console.log(e)}
     // 서브밋핸들러
     const handlerSubmit = (e) => {
         e.preventDefault();
@@ -26,27 +29,27 @@ function LoginModal ({onClick}) {
         } else if (inputRefPw.current.value.trim() === "") {
             SweetAlert("비밀번호를 입력해주세요.", "대소문자+숫자+특수문자를 포함한 최소 6자 이상");
         } else {
-            // 엑시오스
+            UseAxios("api/user", callback, "get");
         }
     }
     return (
         <CommonModal onClick={onClick}>
             <form onSubmit={e => handlerSubmit(e)}>
             <h1>TodoTogether</h1>
-            <StyledInput id="id"
-                         name="id"
+            <StyledInput id="email"
+                         name="email"
                          type="text"
                          labeling={"아이디"}
-                         value={values.id || ""}
-                         onChange={e => handlerValues("id",e)}
+                         value={values.email || ""}
+                         onChange={e => handlerValues("email",e)}
                          Ref={e => inputRefId.current = e}
                          />
-            <StyledInput id="pw"
-                         name="pw"
+            <StyledInput id="password"
+                         name="password"
                          type="password"
                          labeling={"비밀번호"}
-                         value={values.pw || ""}
-                         onChange={e => handlerValues("pw",e)}
+                         value={values.password || ""}
+                         onChange={e => handlerValues("password",e)}
                          Ref={e => inputRefPw.current = e}
                          />
             <button className="loginBtn">로그인</button><br></br>
