@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import SweetAlert from "../common/sweetAlert";
-import UseAxios from "../common/useAxios";
 
 function LoginModal ({onClick}) {
     const [values, setValues] = useState([]);
