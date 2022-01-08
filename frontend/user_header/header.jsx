@@ -4,13 +4,13 @@ import { throttle } from "lodash";
 import "./header.scss";
 import styled from "styled-components";
 
-import { BsFillBellFill } from "react-icons/bs";
+import { BsFillBellFill, BsList } from "react-icons/bs";
 import StyledLinkBtn from "../common/StyledLinkBtn";
 import { Link } from "react-router-dom";
 import LoginModal from "./loginModal";
 
 function Header () {
-    const [isLogin, setIsLogin] = useState();
+    const [isLogin, setIsLogin] = useState(true);
     const [ showing, setShowing ] = useState(false);
     const [scrollEvent, setScrollEvent] = useState(false);
 
@@ -40,10 +40,10 @@ function Header () {
                 <Link to="/">TodoTogether</Link>
                 <Link className="basicBtn" to="/notice">공지사항</Link>
             </div>
-            <h1>{isLogin ? <BsFillBellFill/> : null}</h1>
+            {isLogin ? <BsFillBellFill style={{fontSize: "2.5vw", cursor:"pointer"}}/> : null}
             <div className="innerWrapper"> 
-                <span className="basicBtn" onClick={ handlerModal }>로그인</span>
-                <StyledLinkBtn to="/signup">회원가입</StyledLinkBtn>
+                {isLogin ? <span className="basicBtn">박하님</span> : <span className="basicBtn" onClick={ handlerModal }>로그인</span>}
+                {isLogin ? <BsList style={{fontSize: "25px", cursor:"pointer"}}/> : <StyledLinkBtn to="/signup">회원가입</StyledLinkBtn>}
             </div>
         </HeaderTag>
         {showing ? <LoginModal onClick={ handlerModal }/> : null}

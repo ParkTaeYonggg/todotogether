@@ -12,7 +12,6 @@ export default function UseAxios (url, callback, type, formData) {
 
     if (type === "post") {
         const api = axios.create({ 
-            baseURL: "http://54.180.218.232:8080/api/",
             headers: {
                 Accept: 'application/json',
                 ContentType: 'application/json',

@@ -2,26 +2,30 @@ import React from "react";
 import LeftSignup from "./leftSignup";
 import RightSignup from "./rightSignup";
 import EmptyChk from "../user_body_common/emptyChk";
-import UseAxios from "../../common/useAxios";
+import axios from "axios";
 
 
 export default function UserSignup () {
     const formData = new FormData(); 
-    // const formData = new URLSearchParams();
     const callbackData = (type,e) => { formData.append(type,e) }
-    const callback = (e) => {alert(e)}
 
      // 서브밋핸들러
      const handlerSubmit = (e) => { 
         e.preventDefault();
         EmptyChk(e);
 
-        
-        let url = "user/test5?";
+        let url = {};
         for (const [k,v] of formData) {
-            url += `&${k}=${v}`;
+            url = {...url, [k]:v}
         }
-        UseAxios(url, callback, "post", formData);
+        axios.post("api/user/",url)
+        .then(res => {
+            if (res) {
+                //페이지 홈으로
+            } else {
+                //회원창유지
+            }
+        });
      }
 
     return (
@@ -37,6 +41,7 @@ export default function UserSignup () {
                 </div>
                 </div>
                 <button className="signupSendBtn commonUserSignupBtn">회원가입</button>
+                {/* 조회, 수정페이지는 이부분이 다름 */}
             </form>
         </div>
     );

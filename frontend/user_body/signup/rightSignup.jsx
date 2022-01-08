@@ -40,7 +40,7 @@ export default function RightSignup () {
                     id="profile"
                     onChange={e => handlerValue(e)}/>
             {state.isChked ? null : <Certification id="certificationRightSignupBtn">인증하기</Certification>}
-            {/* 유알엘, 타입, 콜백함수 넣기 */}
+            {/* 유알엘, 타입, 콜백함수 넣기 + 수정하기 누르면 loading프롭스 전달받아서 토글설정하기*/}
             </StyledCertificationCommonDiv>
         </>
     );
