@@ -8,7 +8,7 @@ import axios from "axios";
 export default function UserSignup () {
     const formData = new FormData(); 
     const callbackData = (type,e) => { formData.append(type,e) }
-
+    const callback = (e) => {console.log(e)}
      // 서브밋핸들러
      const handlerSubmit = (e) => { 
         e.preventDefault();

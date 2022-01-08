@@ -27,7 +27,6 @@ function LoginModal ({onClick}) {
         // } else {
         //      UseAxios("api/user", callback, "get");
         //  }
-
     }
     return (
         <CommonModal onClick={onClick}>

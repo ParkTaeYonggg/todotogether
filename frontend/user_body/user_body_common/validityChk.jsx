@@ -9,7 +9,5 @@ export default function ValidityChk (e, callbackData, callback) {
     // url, callback, post
         // UseAxios("api/user?"+id+"="+value,callback, "post");
         callbackData(id, value);
-
-        // 여기 
     } 
 }
