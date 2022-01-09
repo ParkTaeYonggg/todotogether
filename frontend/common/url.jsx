@@ -1,0 +1,1 @@
+export const COMMONURL = "http://13.125.156.115:8080";

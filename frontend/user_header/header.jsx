@@ -8,9 +8,10 @@ import { BsFillBellFill } from "react-icons/bs";
 import StyledLinkBtn from "../common/StyledLinkBtn";
 import { Link } from "react-router-dom";
 import LoginModal from "./loginModal";
+import HeaderMenuModal from "./headerMenuModal/headerMenuModal";
 
 function Header () {
-    const [isLogin, setIsLogin] = useState();
+    const [isLogin, setIsLogin] = useState(true);
     const [ showing, setShowing ] = useState(false);
     const [scrollEvent, setScrollEvent] = useState(false);
 
@@ -40,10 +41,12 @@ function Header () {
                 <Link to="/">TodoTogether</Link>
                 <Link className="basicBtn" to="/notice">공지사항</Link>
             </div>
-            <h1>{isLogin ? <BsFillBellFill/> : null}</h1>
+
+            {isLogin ? <BsFillBellFill style={{fontSize: "2.5vw", cursor:"pointer" }}/> : <div/>}
+            
             <div className="innerWrapper"> 
-                <span className="basicBtn" onClick={ handlerModal }>로그인</span>
-                <StyledLinkBtn to="/signup">회원가입</StyledLinkBtn>
+                {isLogin ? <span className="basicBtn">박하님</span> : <span className="basicBtn" onClick={ handlerModal }>로그인</span>}
+                {isLogin ?  <HeaderMenuModal/> : <StyledLinkBtn to="/signup">회원가입</StyledLinkBtn>}
             </div>
         </HeaderTag>
         {showing ? <LoginModal onClick={ handlerModal }/> : null}
@@ -53,7 +56,7 @@ function Header () {
 export default Header;
 
 const HeaderTag = styled.div`
-    position: ${props => props.scrollEvent ? "fixed" : "static"};
+    position: ${props => props.scrollEvent ? "fixed" : "relative"};
     background-color: ${props => props.scrollEvent ? "rgb(253, 246, 253)" : "inherit"};
     z-index: 1;   
     margin-top: -8px; 
