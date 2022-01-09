@@ -9,6 +9,9 @@
     width: 100%;
     min-height: 500px;
     padding-top: 100px;
+    @media screen and (max-width: 720px) {
+        min-height: 700px;
+    }
 }
 
 .memberWithdrawal_frm {
@@ -23,12 +26,52 @@
     font-size: 20px;
     text-align: center;
     @media screen and (max-width: 1267px) {
+        .meberWithdrawal_ul { transform: translate(0px, -35px); }
         font-size: 16px;
+    }
+    @media screen and (max-width: 970px) {
+        font-size: 14px;
+    }
+    @media screen and (max-width: 868px) {
+        .meberWithdrawal_ul { transform: translate(0px, -45px); }
+        font-size: 1.8vw;
+    }
+    @media screen and (max-width: 720px) {
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+        justify-content: space-evenly;
+        justify-items: center;
+        height: 90%;
+        .memberWithdrawal_btn1 {
+            width: initial;
+            transform: translate(0px, 0px);
+            font-size: 12px;
+            padding: 2px;
+        }
+        .memberWithdrawal_btn2 {
+            left: 0%;
+            width: 100%;            
+        }
+        #password {
+            width: 70%;
+            transform: translate(0px, 0px); 
+            &::placeholder {
+                transform: translate(20px, 0px);
+            }
+        }
+        .meberWithdrawal_div {
+            order: -1;
+            transform: translate(0px, 0px);
+        }
+        .meberWithdrawal_ul { transform: translate(0px, -40px); }
     }
 }
 .meberWithdrawal_ul {
     position: relative;
     padding-left: 0px;
+    transform: translate(0px, -45px);
+    z-index: 1;
     width: 70%;
     height: 50px;
     line-height: 50px;
@@ -56,6 +99,13 @@
     overflow: scroll;
     border-radius: 15px;
     box-shadow: 0 0 5px 3px common.$fontColor;
+
+    @keyframes slideBox {
+        from { height: 0px; }
+        to { height: 275px; }
+        
+    }
+    animation: slideBox 0.5s both linear;
 }
 .memberWithdrawl_ulTitle {
     display: flex;

@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { BsFillArrowDownCircleFill } from "react-icons/bs";
+import MemberWithdrawalManualMessage from "./memberWithdrawalManualMessage";
 
 export default function MemberWithdrawalSelect ({callbackValues, children}) {
     const [toggle, setToggle] = useState(false);
-    const handlerOptions = () => { setToggle(!toggle) }
+    const handlerOptions = (e) => { 
+        if (inputRefTextArea.current !== e.target) {
+            setToggle(!toggle)
+        }
+    }
 
     const OPTIONS = [
         {key: "c1",value:"서비스 불만족"},
@@ -12,9 +17,13 @@ export default function MemberWithdrawalSelect ({callbackValues, children}) {
         {key: "c4",value:"목표완료"},
         {key: "c5",value:"직접입력"},
     ]
+
+    //ref
+    const inputRefTextArea = useRef();
+
     const SelectTag = ({options, callbackValues}) => {
         return (
-            <ul className="meberWithdrawal_ul" onClick={handlerOptions}>
+            <ul className="meberWithdrawal_ul" onClick={e => handlerOptions(e)}>
                 <span className="memberWithdrawl_ulTitle">{children}<BsFillArrowDownCircleFill/></span>
                 {toggle ? <div className="memberWithdrawal_liWrapper">
                     {options.map(e => 
@@ -25,6 +34,7 @@ export default function MemberWithdrawalSelect ({callbackValues, children}) {
                         </li>
                     )}
                     </div> : null}
+                {children === "직접입력" ? <MemberWithdrawalManualMessage inputRefTextArea={e => inputRefTextArea.current = e}/> : null}
             </ul>
         )
     }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./memberWithdrawal.scss";
 import MemberWithdrawalSelect from "./memberWithdrawalSelect";
 import MemberWithdrawalFindPW from "./memberWithdrawalFindPW";
@@ -6,6 +6,7 @@ import axios from "axios";
 import { COMMONURL } from "../../common/url";
 import SweetAlert from "../../common/sweetAlert";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 export default function MemberWithdrawal () {
     const [selectValue, setSelectValue] = useState("탈퇴사유를 선택해주세요.");
