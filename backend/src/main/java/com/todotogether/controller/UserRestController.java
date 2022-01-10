@@ -75,21 +75,6 @@ public class UserRestController {
     }
 
 
-    @PostMapping("/test2")
-    public MemberDto Test23(@RequestBody MemberDto memberDto){
-        System.out.println(memberDto);
-
-        return memberDto;
-    }
-
-    @GetMapping(value = "test11")
-    public String tes443332(@RequestParam String email){
-
-        System.out.println(email);
-        return email;
-    }
-
-
     //회원가입(s3 가능해야함)
     @PostMapping(value = "/")
     public ResponseEntity<Boolean> signUp(@RequestBody MemberDto memberDto){
