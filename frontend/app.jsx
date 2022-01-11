@@ -33,7 +33,7 @@ export default function App () {
             <Route path="/signup" component={UserSignup} />
 
             <Route path="/goodbye" component={MemberWithdrawal}/>
-
+            <Route exact path="/errorPage" component={ErrorPage}/>
             <Route path="/" component={Footer} />
         </>
     );
