@@ -8,6 +8,8 @@ const LazyHeader = lazy(() => import("./user_header/header"))
 const LazyFooter = lazy(() => import("./user_footer/footer"))
 const LazyErrorPage = lazy(() => import("./common/errorPage"))
 const LazyMemberWithdrawal = lazy(() => import("./user_body/memberWithdrawal/memberWithdrawal"))
+const LazyMyTodoList = lazy(() => import("./user_body/myTodoList/myTodoList"))
+
 // import UseAxios from "./common/useAxios";
 
 // export const Authentication = React.createContext(null);
@@ -33,8 +35,9 @@ export default function App () {
                 <Route path="/" component={LazyHeader} />
                 <Route exact path="/" component={LazyMainBody} />
                 <Route path="/signup" component={LazySignup} />
-                <Route path="/goodbye" component={LazyMemberWithdrawal}/>
-                <Route exact path="/errorPage" component={LazyErrorPage}/>
+                <Route path="/goodbye" component={LazyMemberWithdrawal} />
+                <Route path="/mytodolist" component={LazyMyTodoList} />
+                <Route exact path="/errorPage" component={LazyErrorPage} />
                 <Route path="/" component={LazyFooter} />
             </Suspense>
         </>

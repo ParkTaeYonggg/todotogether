@@ -1,0 +1,22 @@
+@use "../../common/common";
+
+.myTodoListWrapper {
+    width: 90%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 15% 10% 75%;
+    background-color: brown;
+    font-size: 2.2vw;
+    padding: 0px 15px 0px 15px;
+
+    .mytodoTitle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    svg {justify-self: end;}
+    .mytodoContent {
+
+    }
+
+}
