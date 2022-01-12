@@ -3,6 +3,7 @@ import LeftSignup from "./leftSignup";
 import RightSignup from "./rightSignup";
 import EmptyChk from "../user_body_common/emptyChk";
 import axios from "axios";
+import { COMMONURL } from "../../common/url";
 
 
 export default function UserSignup () {
