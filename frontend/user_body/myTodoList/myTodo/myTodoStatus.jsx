@@ -26,7 +26,9 @@ export default function MyTodoStatus () {
             <div className="mytodoContent">
                 {todoData ? todoData : null}
                 <MyTodoContent callbackUpdating={callbackUpdating}
-                               isUpdating={isUpdating}/>
+                               isUpdating={isUpdating}
+                               data={[{key:"zz",value:"xx"}]}/>
+                               {/* 이런식으로 포문으로 데이터 넣어줄 것임 key는 아마 id값이 될 것임. */}
             </div>
         </>
      

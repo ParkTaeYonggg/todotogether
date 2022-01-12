@@ -1,4 +1,5 @@
 import React, { useEffect, useState }  from "react";
+import { theme } from "../../../common/theme";
 import MyTodoStatus from "./myTodoStatus";
 
 export default function MyTodo () {
@@ -10,8 +11,8 @@ export default function MyTodo () {
     return (
         <div className="myTodoListWrapper">
         <div className="mytodoTitle">
-            <span onClick={handlerTodo}>ToDo</span>
-            <span onClick={handlerDone}>done</span>
+            <span onClick={handlerTodo} style={{color: theme.adminFontColor2, cursor: "pointer"}}>ToDo</span>
+            <span onClick={handlerDone} style={{color: theme.adminFontColor2, cursor: "pointer"}}>done</span>
         </div>
             {todoStatus ? <MyTodoStatus /> : <div>던</div>}
         </div>

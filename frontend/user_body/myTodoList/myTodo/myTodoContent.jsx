@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { theme } from "../../../common/theme";
 import StyledInput from "../../../common/StyledInput";
@@ -6,9 +6,17 @@ import StyledInput from "../../../common/StyledInput";
 import MytodoDelete from "./myTodoDelete";
 import MyTodoReWrite from "./myTodoReWrite";
 
-export default function MyTodoContent ({isUpdating, callbackUpdating, isCreating, callbackCreating, callbackTodoData}) {
-    const [content, setContent] = useState("");
+export default function MyTodoContent ({isUpdating, callbackUpdating, isCreating, callbackCreating, callbackTodoData, data = [{value:""}]}) {
+    const [content, setContent] = useState(data);
     const handlerValue = (e) => setContent(e.target.value)
+    // 아래 프리브를 이용해서 기존의 값을 저장하고
+    // 1. 변경값이 없을 때, 2. 변경값이 여백일 때, 3. 변경값이 다를 때 조건으로 뭔가 생성.
+    const prevRef = useRef(content);
+    useEffect(() => {
+        if (!isUpdating && isUpdating !== undefined) {
+            console.log(prevRef !== content)
+        }
+    },[isUpdating])
     return (
         <StyledMyTodoContentWrapper>
             <div className="myTodoInMyTodoContentWrapper1">
@@ -16,7 +24,7 @@ export default function MyTodoContent ({isUpdating, callbackUpdating, isCreating
                              name="content"
                              type="text"
                              labeling="내용"
-                             value={content}
+                             value={content[0].value}
                              onChange={e => handlerValue(e)}
                              readonly={isUpdating || isCreating ? false : true}
                              />

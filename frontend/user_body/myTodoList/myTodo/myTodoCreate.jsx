@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { BsFillPlusCircleFill } from "react-icons/bs";
+import { theme } from "../../../common/theme";
 import MyTodoContent from "./myTodoContent";
 
 export default function MyTodoCreate ({isCreating, callbackCreating, callbackTodoData}) {
@@ -12,7 +13,7 @@ export default function MyTodoCreate ({isCreating, callbackCreating, callbackTod
     return (
         <>
             {isCreating ? <BsFillPlusCircleFill style={{color: "#dcdcdc"}}/> : 
-                          <BsFillPlusCircleFill style={{cursor: "pointer"}}
+                          <BsFillPlusCircleFill style={{cursor: "pointer", color:theme.buttonColor}}
                                                 onClick={() => callbackCreating(true)} />}
         </>
     );

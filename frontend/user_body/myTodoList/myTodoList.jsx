@@ -18,7 +18,6 @@ export default function MyTodoList () {
 const StyledMyTodoListWrapper = styled.div`
     width: 100%;
     min-height: 500px;
-    background-color: yellow;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,7 +27,6 @@ const StyledMyTodoListWrapper = styled.div`
         grid-template-columns: 50% 50%;
         width: 80%;
         height: 400px;
-        background-color: skyblue;
         justify-items: center;
         align-items: center;
 
