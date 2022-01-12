@@ -4,14 +4,17 @@ package com.todotogether.domain.entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @Entity
 public class Member extends BaseTimeEntity{
     @Id
@@ -35,7 +38,7 @@ public class Member extends BaseTimeEntity{
     private boolean enabled;
 
     @Column(nullable = false)
-    private int phone;
+    private String phone;
 
     @Column(nullable = false, length = 40)
     private String backupEmail;
@@ -52,7 +55,7 @@ public class Member extends BaseTimeEntity{
             joinColumns = @JoinColumn(name="user_id"),
             inverseJoinColumns = @JoinColumn(name="role_id")
     )
-    private List<Role> roles;
+    private List<Role> roles = new ArrayList<>();
 
     @OneToMany(mappedBy = "nMember", cascade = CascadeType.REMOVE)
     private List<Notification> notifications;

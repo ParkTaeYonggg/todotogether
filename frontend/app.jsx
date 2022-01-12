@@ -14,6 +14,11 @@ const LazyMyTodoList = lazy(() => import("./user_body/myTodoList/myTodoList"))
 
 // export const Authentication = React.createContext(null);
 
+import MemberWithdrawal from "./user_body/memberWithdrawal/memberWithdrawal";
+// import UseAxios from "./common/useAxios";
+
+// export const Authentication = React.createContext(null);
+
 export default function App () { 
     // const search = window.location.search;
     // const params = new URLSearchParams(search);
@@ -27,8 +32,6 @@ export default function App () {
     // useEffect(()=>{
     //     authenticate();
     // },[]);
-
-
     return (
         <>
             <Suspense fallback={<LoadingPage/>}>
