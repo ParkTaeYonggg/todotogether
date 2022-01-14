@@ -14,9 +14,15 @@
         align-items: center;
     }
     svg {justify-self: end;}
+    h6 { font-size: 10px; }
     .mytodoContent {
         height: inherit;
         overflow-y: scroll;
     }
 
+}
+
+.TodoTogetherChoiceBtn {
+    color: common.$adminFontColor2;
+    cursor: pointer;
 }
