@@ -1,0 +1,74 @@
+@use "../../../common/common";
+
+.myTogetherContentWrapper{
+    display: grid;
+    grid-template-columns: 18% 15% 37% 23% 7%;
+    height: 70px;
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: inset 0px 0px 7px 0px;
+    background-color: rgb(248,248,248);
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 1.5vw;
+    margin-bottom: 10px;
+    cursor: pointer;
+
+    .myTogetherContentGaugeBar {
+        display: grid;
+        grid-template-rows: 33% 33% 33%;
+        align-items: center;
+        justify-items: center;
+        font-size: 1.3vw;
+    }
+    .myTogetherContentImg { 
+        width: 80%; 
+        height: 60%; 
+        justify-self: center; 
+        border-radius: 15px; 
+    }
+    .myTogetherContentDate {
+        font-size: 1.3vw;
+    }
+    .myTogetherContentEtc {
+        justify-content: center;
+    }
+    .myTogetherContentCategory {
+        justify-self: center;
+    }
+}
+
+// addModal
+.myTogetherContentAddModalWrapper {
+    border-radius: 20px;
+    background-color: common.$boxColor;
+    width: 100%;
+    height: 200px;
+    margin-bottom: 10px;
+    box-shadow: inset 0 0 6px 1px;
+    animation: toggleAddModal 0.3s both linear;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    font-size: 1.2vw;
+    @keyframes toggleAddModal {
+        from {height: 0px;}
+    }
+    @keyframes toggleImg {
+        from {opacity: 0;}
+    }
+
+    .myTogetherContentAddModalSection1 {
+        z-index: 1;
+        justify-self: center;
+        width: 90%;
+        .myTogetherContentAddModalImg {
+            width: 100%;
+            animation: toggleImg 0.8s both linear;
+        }
+    }
+    svg {font-size: 1vw;}
+    .myTogetherContentEtcWrapper {margin-top: 10px;}
+}

@@ -29,7 +29,7 @@ const StyledMyTodoListWrapper = styled.div`
         height: 400px;
         justify-items: center;
         align-items: center;
-
+        
         .myTodoListContent1 {
             width: 90%;
             height: 100%;
@@ -40,5 +40,13 @@ const StyledMyTodoListWrapper = styled.div`
             height: 100%;
             background-color: green;
         }
+        @media screen and (max-width: 720px) {
+            grid-template-columns: 100%;
+            grid-template-rows: 50% 50%;
+            height: 800px;
+        }
+    }
+    @media screen and (max-width: 720px) {
+        margin-top: 30px;
     }
 `;
