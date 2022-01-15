@@ -21,7 +21,8 @@ export default function MyTogether () {
                 {choice ? togetherListDB.map(e => <MyTogetherContent profile={e.profile}
                                                             category={e.category}
                                                             startDate={e.stratDate}
-                                                            endDate={e.endDate}/>) : <div>투게더 던</div> }
+                                                            endDate={e.endDate}
+                                                            content={e.content}/>) : <div>투게더 던</div> }
             </div>
         </div>
     )

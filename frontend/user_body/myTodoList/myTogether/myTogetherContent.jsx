@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
+import "./myTogetherScss.scss";
 import styled from "styled-components";
 import { BsTrashFill } from "react-icons/bs";
 import { theme } from "../../../common/theme";
+import MyTogetherContentAddModal from "./myTogetherAddModal";
 
-export default function MyTogetherContent ({profile, category, startDate, endDate}) {
+export default function MyTogetherContent ({profile, category, startDate, endDate, content}) {
     const [date, setDate] = useState("");
-
+    const [addModal, setAddModal] = useState(false);
+    const handlerAddModal = () => { setAddModal(!addModal) }
     // 시간계산
     useEffect(() => {
         // 날짜데이터로 변환
@@ -26,71 +29,42 @@ export default function MyTogetherContent ({profile, category, startDate, endDat
     },[])
 
     return (
-        <MyTogetherContentWrapper date={date}>
-            <img src={profile} alt="사진" className="myTogetherContentImg"/>
-            <span className="myTogetherContentCategory">{category}</span>
-            <div className="myTogetherContentGaugeBar">
-                <span>달성치</span>
-                <span className="myTogetherContentGauge"></span>
-                <span>{date}%</span>
+        <>
+            <div onClick={() => handlerAddModal()} className="myTogetherContentWrapper">
+                <img src={profile} alt="사진" className="myTogetherContentImg"/>
+                <span className="myTogetherContentCategory">{category}</span>
+                <div className="myTogetherContentGaugeBar">
+                    <span>달성치</span>
+                    <MyTogetherContentGauge date={date}></MyTogetherContentGauge>
+                    <span>{date}%</span>
+                </div>
+                <div className="myTogetherContentDate">{startDate} ~ {endDate}</div>
+                <div className="myTogetherContentEtc">
+                    <BsTrashFill onClick={() => alert("삭제되었습니다.")}/>
+                </div>
             </div>
-            <div className="myTogetherContentDate">{startDate} ~ {endDate}</div>
-            <div className="myTogetherContentEtc">
-                <BsTrashFill onClick={() => alert("삭제되었습니다.")}/>
-            </div>
-        </MyTogetherContentWrapper>
+            {addModal ? <MyTogetherContentAddModal profile={profile}
+                                                   category={category}
+                                                   startDate={startDate}
+                                                   endDate={endDate}
+                                                   date={date} 
+                                                   MyTogetherContentGauge={MyTogetherContentGauge}
+                                                   content={content}/> : null}
+        </>
     )
 }
-const MyTogetherContentWrapper = styled.div`
-    display: grid;
-    grid-template-columns: 18% 15% 37% 23% 7%;
-    height: 70px;
-    width: 100%;
+const MyTogetherContentGauge = styled.div`
+    width: 80%;
+    height: 3px;
     border-radius: 20px;
-    box-shadow: inset 0px 0px 7px 0px;
-    background-color: rgb(248,248,248);
-    justify-content: space-evenly;
-    align-items: center;
-    font-size: 1.5vw;
-    margin-bottom: 10px;
-    cursor: pointer;
+    background-color: #dcdcdc;
+    position: relative;
 
-    .myTogetherContentGaugeBar {
-        display: grid;
-        grid-template-rows: 33% 33% 33%;
-        align-items: center;
-        justify-items: center;
-        font-size: 1.3vw;
-    }
-    .myTogetherContentGauge {
-        width: 80%;
-        height: 3px;
-        border-radius: 20px;
-        background-color: #dcdcdc;
-        position: relative;
-
-        &::after {
-            position: absolute;
-            content: '';
-            width: ${props => props.date}%;
-            height: 100%;
-            background-color: ${theme.titleColor};    
-        }
-    }
-
-    .myTogetherContentImg { 
-        width: 80%; 
-        height: 60%; 
-        justify-self: center; 
-        border-radius: 15px; 
-    }
-    .myTogetherContentDate {
-        font-size: 1.3vw;
-    }
-    .myTogetherContentEtc {
-        justify-content: center;
-    }
-    .myTogetherContentCategory {
-        justify-self: center;
+    &::after {
+        position: absolute;
+        content: '';
+        width: ${props => props.date}%;
+        height: 100%;
+        background-color: ${theme.titleColor};    
     }
 `;
