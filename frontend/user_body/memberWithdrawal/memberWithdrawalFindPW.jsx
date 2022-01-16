@@ -18,7 +18,7 @@ export default function MemberWithdrawalFindPW ({callbackChkPw}) {
         <>
             <StyledInput type="text"
                                 name="password"
-                                id="password"
+                                id="withDrawalPassword"
                                 labeling="비밀번호"
                                 value={password}
                                 onChange={e => handlerValue(e)}
