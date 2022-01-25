@@ -1,0 +1,26 @@
+@use "../common/common";
+
+.basicBtn {
+    color: common.$purple;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: inherit;
+    border: none;
+};
+
+.innerWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 80%;    
+    background-color: inherit;
+}
+
+
+.loginBtn {
+    @include common.aniBtn();
+    width: 100%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
