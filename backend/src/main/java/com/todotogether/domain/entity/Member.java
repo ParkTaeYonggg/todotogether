@@ -1,10 +1,7 @@
 package com.todotogether.domain.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
@@ -16,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Member extends BaseTimeEntity{
+public class Member{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long uId;
@@ -26,29 +23,6 @@ public class Member extends BaseTimeEntity{
 
     @Column(nullable = false, length = 70)
     private String password;
-
-    @Column(nullable = false, length = 20)
-    private String name;
-
-    @Column(nullable = false, length = 30)
-    private String nickname;
-
-    @Column(nullable = false)
-    @ColumnDefault("true")
-    private boolean enabled;
-
-    @Column(nullable = false)
-    private String phone;
-
-    @Column(nullable = false, length = 40)
-    private String backupEmail;
-
-    @Column(nullable = false)
-    @ColumnDefault("0")
-    private int rpCount;
-
-    @Column(length = 30)
-    private String profile;
 
     @ManyToMany
     @JoinTable(name = "user_role",
