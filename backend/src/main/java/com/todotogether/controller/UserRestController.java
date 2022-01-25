@@ -1,5 +1,6 @@
 package com.todotogether.controller;
 
+import com.todotogether.auth.PrincipalDetails;
 import com.todotogether.domain.dto.MemberDto;
 import com.todotogether.domain.dto.UploadFileDto;
 import com.todotogether.domain.entity.Member;
@@ -11,7 +12,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -41,11 +45,10 @@ public class UserRestController {
         this.imageManagerService = imageManagerService;
         this.passwordEncoder = passwordEncoder;
     }
-
     /*
             회원 유효성 검사
      */
-    @PostMapping("/valid")
+    @PostMapping("/register/valid")
     public ResponseEntity userValid(@RequestBody(required = false) @Valid MemberDto memberDto, Errors errors){
 
         Map<String, String> validatorResult = null;
@@ -65,7 +68,8 @@ public class UserRestController {
         //아이디 중복 검증 유효성 검사
         try{
             Member member = modelMapper.map(memberDto, Member.class);
-            memberService.validateMember(member);
+            String email = memberDto.getEmail();
+            memberService.validateMember(member, email);
         }catch (IllegalStateException e){
             validatorResult.put("valid_idCheck",e.getMessage());
             //return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
@@ -74,9 +78,8 @@ public class UserRestController {
         return ResponseEntity.status(HttpStatus.OK).body(validatorResult);
     }
 
-
     //회원가입(s3 가능해야함)
-    @PostMapping(value = "/")
+    @PostMapping(value = "/register/")
     public ResponseEntity<Boolean> signUp(@RequestBody MemberDto memberDto){
 
         System.out.println(memberDto);
@@ -92,7 +95,7 @@ public class UserRestController {
     }
 
     // 파일전송 테스트 코드 실제론 dto받고 경로 전송
-    @PostMapping(value ="/file")
+    @PostMapping(value ="/register/file")
     public ResponseEntity upload(@RequestParam(required = false) MultipartFile profile){
         String folderName = "image";
         UploadFileDto uploadFileDto = null;
@@ -107,10 +110,8 @@ public class UserRestController {
             return ResponseEntity.status(HttpStatus.OK).body(uploadFileDto);
     }
 
-
-
     //email인증 클릭시 인증번호 발송
-    @PostMapping("/emailConfirm")
+    @PostMapping("/register/emailConfirm")
     public ResponseEntity<String> emailConfirm(@RequestBody String email)throws Exception{
 
         String confirm = emailService.sendSimpleMessage(email);
@@ -118,5 +119,37 @@ public class UserRestController {
         return ResponseEntity.status(HttpStatus.OK).body(confirm);
     }
 
+    //로그인 후 계정 세션 정보를 확인
+    @GetMapping("/register/login")
+    public String testLogin(Authentication authentication, @AuthenticationPrincipal PrincipalDetails PrincipalDetails){
+        //1번째 방법 getUser정보
+        PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
+        log.info("authentication : " + principalDetails.getMember());
+
+        //2번째 방법 생성한 principalDetails 상속받은 userDetails을 활용하는 방법
+        log.info("userDetails : " + PrincipalDetails.getMember());
+        return "세션 정보 확인";
+    }
+
+    //구글 로그인 후 세션 정보 확인하기
+    @GetMapping("/register/login")
+    public String testOAuthLogin(Authentication authentication, @AuthenticationPrincipal OAuth2User oauth){
+        //1번째 방법 getUser정보
+        OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
+        log.info("authentication : " + oAuth2User.getAttributes());
+
+        log.info("oauth2User : " + oauth.getAttributes());
+
+
+        //2번째 방법 생성한 principalDetails 상속받은 userDetails을 활용하는 방법
+        return "OAuth 세션 정보 확인";
+    }
+
+    //OAuth 로그인을 해도 PrincipalDetails
+    //일반 로그인을 해도 PrincipaDetails
+    @GetMapping("/register/user")
+    public Member user(@AuthenticationPrincipal PrincipalDetails principalDetails){
+        return principalDetails.getMember();
+    }
 
 }
