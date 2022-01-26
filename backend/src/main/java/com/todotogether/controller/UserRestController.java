@@ -1,9 +1,15 @@
 package com.todotogether.controller;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.todotogether.auth.PrincipalDetails;
 import com.todotogether.domain.dto.MemberDto;
 import com.todotogether.domain.dto.UploadFileDto;
 import com.todotogether.domain.entity.Member;
+import com.todotogether.domain.entity.Role;
 import com.todotogether.service.EmailService;
 import com.todotogether.service.ImageManagerService;
 import com.todotogether.service.MemberService;
@@ -20,11 +26,22 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
+import static org.springframework.http.HttpStatus.FORBIDDEN;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Slf4j
 @RestController
@@ -38,7 +55,7 @@ public class UserRestController {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserRestController(MemberService memberService, ModelMapper modelMapper, EmailService emailService, ImageManagerService imageManagerService, PasswordEncoder passwordEncoder) {
+    public UserRestController(MemberService memberService, ModelMapper modelMapper, EmailService emailService, ImageManagerService imageManagerService ,PasswordEncoder passwordEncoder) {
         this.memberService = memberService;
         this.modelMapper = modelMapper;
         this.emailService = emailService;
@@ -78,7 +95,7 @@ public class UserRestController {
         return ResponseEntity.status(HttpStatus.OK).body(validatorResult);
     }
 
-    //회원가입(s3 가능해야함)
+   //회원가입(s3 가능해야함)
     @PostMapping(value = "/register/")
     public ResponseEntity<Boolean> signUp(@RequestBody MemberDto memberDto){
 
@@ -152,4 +169,39 @@ public class UserRestController {
         return principalDetails.getMember();
     }
 
+    @GetMapping("/token/refresh")
+    public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String authorizationHeader = request.getHeader(AUTHORIZATION);
+        if(authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            try {
+                String refresh_token = authorizationHeader.substring("Bearer ".length());
+                Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
+                JWTVerifier verifier = JWT.require(algorithm).build();
+                DecodedJWT decodedJWT = verifier.verify(refresh_token);
+                String email = decodedJWT.getSubject();
+                log.info("email{}", email);
+                Member member = memberService.getMember(email);
+                String access_token = JWT.create()
+                        .withSubject(member.getEmail())
+                        .withExpiresAt(new Date(System.currentTimeMillis() + 5 * 60 * 1000))
+                        .withIssuer(request.getRequestURL().toString())
+                        .withClaim("roles", member.getRoles().stream().map(Role::getRName).collect(Collectors.toList()))
+                        .sign(algorithm);
+                Map<String, String> tokens = new HashMap<>();
+                tokens.put("access_token", access_token);
+                tokens.put("refresh_token", refresh_token);
+                response.setContentType(APPLICATION_JSON_VALUE);
+                new ObjectMapper().writeValue(response.getOutputStream(), tokens);
+            }catch (Exception exception) {
+                response.setHeader("error", exception.getMessage());
+                response.setStatus(FORBIDDEN.value());
+                Map<String,String> error = new HashMap<>();
+                error.put("error_message", exception.getMessage());
+                response.setContentType(APPLICATION_JSON_VALUE);
+                new ObjectMapper().writeValue(response.getOutputStream(), error);
+            }
+        }else {
+            throw new RuntimeException("refresh token 사용불가.");
+        }
+    }
 }
