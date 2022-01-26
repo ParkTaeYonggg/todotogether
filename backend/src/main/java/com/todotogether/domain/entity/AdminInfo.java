@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Entity
-public class Admin {
+public class AdminInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long aInfoId;
