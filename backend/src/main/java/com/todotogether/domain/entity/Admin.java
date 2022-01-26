@@ -14,18 +14,12 @@ import javax.persistence.*;
 public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long aId;
+    private long aInfoId;
 
     @ManyToOne
-    @JoinColumn(name = "aRid")
-    private Role role;
-
-    @Column(nullable = false, length = 10)
-    private String aLoginId;
+    @JoinColumn(name = "aUid", nullable = false)
+    private Member member;
 
     @Column(nullable = false, length = 70)
-    private String aPassword;
-
-    @Column(length = 40)
     private String aEmail;
 }
