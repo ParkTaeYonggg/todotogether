@@ -1,11 +1,18 @@
-import React, { useEffect, useState } from "react";
-import ErrorPage from "./common/errorPage";
+import React, { lazy, Suspense } from "react";
 import {Route} from "react-router-dom";
-import Header from "./user_header/header";
-import MainBody from "./user_body/mainPage/mainBody";
-import UserSignup from "./user_body/signup/userSignup";
-import Footer from "./user_footer/footer";
+import LoadingPage from "./common/loadingPage";
 
+const LazyMainBody = lazy(() => import("./user_body/mainPage/mainBody"))
+const LazySignup = lazy(() => import("./user_body/signup/userSignup"))
+const LazyHeader = lazy(() => import("./user_header/header"))
+const LazyFooter = lazy(() => import("./user_footer/footer"))
+const LazyErrorPage = lazy(() => import("./common/errorPage"))
+const LazyMemberWithdrawal = lazy(() => import("./user_body/memberWithdrawal/memberWithdrawal"))
+const LazyMyTodoList = lazy(() => import("./user_body/myTodoList/myTodoList"))
+
+// import UseAxios from "./common/useAxios";
+
+// export const Authentication = React.createContext(null);
 
 import MemberWithdrawal from "./user_body/memberWithdrawal/memberWithdrawal";
 // import UseAxios from "./common/useAxios";
@@ -25,16 +32,17 @@ export default function App () {
     // useEffect(()=>{
     //     authenticate();
     // },[]);
-
     return (
         <>
-            <Route path="/" component={Header} />
-            <Route exact path="/" component={MainBody} />
-            <Route path="/signup" component={UserSignup} />
-
-            <Route path="/goodbye" component={MemberWithdrawal}/>
-
-            <Route path="/" component={Footer} />
+            <Suspense fallback={<LoadingPage/>}>
+                <Route path="/" component={LazyHeader} />
+                <Route exact path="/" component={LazyMainBody} />
+                <Route path="/signup" component={LazySignup} />
+                <Route path="/goodbye" component={LazyMemberWithdrawal} />
+                <Route path="/mytodolist" component={LazyMyTodoList} />
+                <Route exact path="/errorPage" component={LazyErrorPage} />
+                <Route path="/" component={LazyFooter} />
+            </Suspense>
         </>
     );
 }

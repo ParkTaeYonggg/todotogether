@@ -3,22 +3,27 @@ package com.todotogether.service;
 import com.todotogether.domain.entity.Member;
 import com.todotogether.domain.entity.Role;
 import com.todotogether.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
+@Transactional
+@Slf4j
 public class MemberService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
-
 
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
@@ -50,22 +55,24 @@ public class MemberService implements UserDetailsService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
         Member member = memberRepository.findByEmail(email);
 
-        if (member == null) {
-            throw new UsernameNotFoundException(email);
+        if(member == null) {
+            log.error("email이 일치하는 member가 DB에 존재하지 않습니다.");
+            throw new UsernameNotFoundException("email이 일치하는 member가 DB에 존재하지 않습니다.");
+        } else {
+            log.info("DB에서 조회된 member email : {}", email);
         }
 
-        return User.builder()
-                .username(member.getEmail())
-                .password(member.getPassword())
-                .roles(member.getRoles().get(1).toString())
-                .build();
-    }
+        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        member.getRoles().forEach(role -> {
+            authorities.add(new SimpleGrantedAuthority(role.getRName()));
+        });
 
+        return new org.springframework.security.core.userdetails.User(member.getEmail(), member.getPassword(), authorities);
+    }
 
     //추가 내용 -----
     public Map<String, String> validateHandling(Errors errors) {
@@ -80,4 +87,8 @@ public class MemberService implements UserDetailsService {
 
     // -----------
 
+    public Member getMember(String email) {
+        log.info("Fetching User : {}", email);
+        return memberRepository.findByEmail(email);
+    }
 }

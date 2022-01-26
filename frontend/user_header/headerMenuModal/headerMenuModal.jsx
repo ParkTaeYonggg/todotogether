@@ -15,7 +15,7 @@ export default function HeaderMenuModal () {
             <HeaderMenu_Modal modal={modal}>
                 <Link>회원정보</Link>
                 <Link to="/goodbye">확인용(회원탈퇴)</Link>
-                <Link>메뉴3</Link>
+                <Link to="/mytodolist">마이투두</Link>
                 <Link>메뉴4</Link>
                 <Link>로그아웃</Link>
             </HeaderMenu_Modal>
